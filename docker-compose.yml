@@ -1,0 +1,25 @@
+---
+version: '3'
+services:
+  node:
+    build: .
+    user: "node"
+    container_name: "${PROJECT_NAME}"
+    working_dir: /usr/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/usr/app
+    expose:
+      - "8888"
+#    network_mode: bridge
+#    restart: always
+    command: "npm start"
+
+    # Don't forget to add a .env with all the variables used in this file.
+    env_file:
+     - .env
+    extra_hosts:
+     - "${HOSTNAME}:${HOSTIP}"
+#    ports:
+#     - "${VIRTUAL_HOST}:${PORT}:${PORT}"
